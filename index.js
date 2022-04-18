@@ -76,14 +76,14 @@ app.use("/v0", require("./rest"));
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => {
-	next(utils.error(404, "Not Found: " + req.method + " " + req.originalUrl));
+	next(utils.error(404, `Not Found: ${req.method} ${req.originalUrl}`));
 });
 
 // Error handler
 app.use((err, req, res, next) => {
 	if (err instanceof utils.HTTPError) {
 		// don't log stack trace and whatnot for operational http errors
-		logger.error(err.status + " " + err.message);
+		logger.error(`${err.status} ${err.message}`);
 	}
 	else {
 		logger.error(err);

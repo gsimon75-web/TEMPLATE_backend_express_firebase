@@ -58,19 +58,19 @@ function mwrap(req, res, next, handler) {
 			res.status(204).end();
 		}
 		else if (response instanceof Buffer) {
-			logger.debug("response = Buffer, length=" + response.length);
+			logger.debug(`response=Buffer, length=${response.length}`);
 			res.status(200).send(response);
 		}
 		else if (typeof(response) === "number") {
 			res.status(response).end();
 		}
 		else {
-			logger.debug("response = " + JSON.stringify(response));
+			//logger.debug(`response=${JSON.stringify(response)}`);
 			res.status(200).json(response);
 		}
 	}).catch(err => {
 		if (err instanceof HTTPError) {
-			logger.debug("error " + err.status + ": " + err.message);
+			logger.debug(`error ${err.status}: ${err.message}`);
 			res.status(err.status || 500);
 			if (err.message) {
 				res.statusMessage = err.message;
@@ -133,21 +133,21 @@ function dump_request(req) {
 	// req.query = {}
 	// req.body = {}
 
-	logger.debug("Request; hostname='" + req.hostname + "', ip='" + req.ip + "', method='" + req.method + "', url='" + req.url + "'");
+	logger.debug(`Request; hostname='${req.hostname}', ip='${req.ip}', method='${req.method}', url='${req.url}'`);
 	for (let name in req.headers) {
-		logger.debug("Request header; name='" + name + "', value='" + req.headers[name] + "'");
+		logger.debug(`Request header; name='${name}', value='${req.headers[name]}'`);
 	}
 	for (let name in req.params) {
-		logger.debug("Request param; name='" + name + "', value='" + req.params[name] + "'");
+		logger.debug(`Request param; name='${name}', value='${req.params[name]}'`);
 	}
 	for (let name in req.query) {
-		logger.debug("Request query; name='" + name + "', value='" + req.query[name] + "'");
+		logger.debug(`Request query; name='${name}', value='${req.query[name]}'`);
 	}
 	for (let name in req.body) {
-		logger.debug("Request body; name='" + name + "', value='" + req.body[name] + "'");
+		logger.debug(`Request body; name='${name}', value='${req.body[name]}'`);
 	}
 	for (let name in req.cookies) {
-		logger.debug("Request cookie; name='" + name + "', value='" + req.cookies[name] + "'");
+		logger.debug(`Request cookie; name='${name}', value='${req.cookies[name]}'`);
 	}
 }
 
@@ -173,7 +173,7 @@ function require_admin(req) {
 function require_body(req, attrs) {
 	for (let attr of attrs) {
 		if (req.body[attr] === undefined) {
-			throw error(400, "Missing " + attr);
+			throw error(400, `Missing ${attr}`);
 		}
 	}
 }
@@ -189,6 +189,7 @@ module.exports = {
 	s2bool,
 	add_cors_response_headers,
 	dump_request,
+	require_client,
 	require_admin,
 	require_body,
 }
