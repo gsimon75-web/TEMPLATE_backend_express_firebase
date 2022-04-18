@@ -1,0 +1,29 @@
+{
+  "name": "market-data-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "node index.js",
+    "test": "mocha --timeout 5000 tests/*.test.js"
+  },
+  "_moduleAliases": {
+    "@root": "."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "connect-mongodb-session": "^3.1.1",
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "firebase-admin": "^10.0.2",
+    "log4js": "^6.4.5",
+    "luxon": "^2.3.1",
+    "mathjs": "^10.4.3",
+    "module-alias": "^2.2.2",
+    "mongodb": "^4.5.0",
+    "option-parser": "^1.0.2",
+    "postgres": "^3.0.5"
+  }
+}
